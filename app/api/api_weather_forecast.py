@@ -1,12 +1,17 @@
-# Get weathe forecasts from these APIs
+import requests
 
-# OpenWeatherMap API
-# Weatherbit API
-# AccuWeather API
-# Dark Sky API
-# Weather2020 API
-# ClimaCell API
-# Visual Crossing API
 
-# class WeatherForecast:
-#
+class WeatherForecast:
+    """
+    Parent class for getting weather from APIs
+    """
+    def __init__(self):
+        pass
+
+
+def main():
+    pass
+
+
+if __name__ == '__main__':
+    main()
