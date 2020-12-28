@@ -3,9 +3,9 @@ from pprint import pprint
 
 from flask import Flask, render_template, request, redirect, url_for
 
-from app.api.open_weather_forecast import OpenWeatherForecaster
-from app.api.weatherbit_forecast import WeatherBitForecaster
-from app.api.accu_weather_forecast import AccuWeatherForecaster
+from weather.api.open_weather_forecast import OpenWeatherForecaster
+from weather.api.weatherbit_forecast import WeatherBitForecaster
+from weather.api.accu_weather_forecast import AccuWeatherForecaster
 
 app = Flask(__name__)
 
