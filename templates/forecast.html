@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="background-color: #f5f5f5; height: 100vh">
+    <div class="container h-100">
+        <div class="row justify-content-center">
+            <div class="col-md-12 col-sm-12 col-xs-12 pt-5">
+            <a href="/"><button type="button" class="btn btn-primary m-2">Back</button></a>
+                {% for probability_weather in probability_weather_forecast %}
+                <div class="card border-0 p-3 shadow-sm text-center">
+                    <h3 class="text-muted">Weather Forecast For {{ city }} ({{ probability_weather['date'] }})</h3>
+
+                    <h5 class="lead text-muted">Weather: {% for weather in probability_weather['weather'] %}
+                        {{ weather[0] }} - probability: {{ weather[1] }}%,
+                    {% endfor %}</h5>
+                    <h5 class="lead text-muted">Temperature: {% for temp in probability_weather['temp'] %}
+                            {{ temp[0] }}&#8451; - probability: {{ temp[1] }}%,
+                        {% endfor %}</h5>
+                    <h5 class="lead text-muted">Humidity: {% for humidity in probability_weather['humidity'] %}
+                            {{ humidity[0] }}% - probability: {{ humidity[1] }}%,
+                        {% endfor %}</h5>
+                    <h5 class="lead text-muted">Wind Speed: {% for wind_speed in probability_weather['wind_speed'] %}
+                        {{ wind_speed[0] }} mph - probability: {{ wind_speed[1] }}%,
+                        {% endfor %}</h5>
+                    <h5 class="lead text-muted">Wind direction: {% for wind_degree in probability_weather['wind_degree'] %}
+                        <b><span style="transform: rotate({{ -wind_degree[0] }}deg);
+                            -ms-transform: rotate({{ -wind_degree[0] }}deg); /*  for IE  */
+
+                            /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+                            -webkit-transform: rotate({{ -wind_degree[0] }}deg);
+                            display: inline-block;">&rarr;</span></b> - probability: {{ wind_degree[1] }}%,
+                    {% endfor %}
+                    </h5>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
