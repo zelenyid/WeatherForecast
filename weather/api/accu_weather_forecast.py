@@ -4,8 +4,18 @@ from config import ACCU_WEATHER_TOKEN
 
 
 class AccuWeatherForecaster:
+    """
+    Class for working with AccuWeather API
+    """
+
     @staticmethod
     def current_weather(city):
+        """
+        Get current weather
+
+        :param city: str, name of city
+        :return: dict, with key (category) and value from result of API for displaying on the page
+        """
         location_url = requests.get(
             'http://dataservice.accuweather.com/locations/v1/cities/search?apikey={}&q={}'.format(ACCU_WEATHER_TOKEN, city))
         location_key = location_url.json()[0]['Key']

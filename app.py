@@ -11,6 +11,11 @@ app = Flask(__name__)
 
 
 def calculate_probability(*results):
+    """
+    Function for calculation
+    :param results: current weather from different APIs
+    :return: dict, key (category) and value it's list of percents
+    """
     weathers = []
     temps = []
     humidity = []
@@ -50,9 +55,15 @@ def calculate_probability(*results):
 
 @app.route('/forecast_weather/<city>')
 def forecast_weather(city):
+    """
+    Get weather forecast from classes that take information in APIs and calculate every category like
+    temperature, humidity and etc
+
+    :param city: city: str, city from form on the start page
+    :return: template forecast.html for weather forecast
+    """
     forecast_open_weather_map = OpenWeatherForecaster.weather_forecast(city)
     forecast_weather_weather_bit = WeatherBitForecaster.weather_forecast(city)
-    # forecast_accuweather = AccuWeatherForecaster.weather_forecast(city)
 
     probability_weather_forecast = []
     for i in range(len(forecast_open_weather_map)):
@@ -67,10 +78,22 @@ def forecast_weather(city):
 
 @app.route('/current_weather/<city>')
 def current_weather(city):
+    """
+    Get current weather from classes that take information in APIs and calculate probability every category like
+    temperature, humidity and etc
+
+    :param city: str, city from form on the start page
+    :return: template result.html for current weather
+    """
+    # Take current weather from classes
     current_weather_open_weather_map = OpenWeatherForecaster.current_weather(city)
     current_weather_weather_bit = WeatherBitForecaster.current_weather(city)
     current_weather_accuweather = AccuWeatherForecaster.current_weather(city)
-    probability_weather = calculate_probability(current_weather_open_weather_map, current_weather_weather_bit, current_weather_accuweather)
+
+    # Calculate every category
+    probability_weather = calculate_probability(current_weather_open_weather_map, current_weather_weather_bit,
+                                                current_weather_accuweather)
+
     return render_template('result.html', open_weather_map=current_weather_open_weather_map,
                            weather_bit=current_weather_weather_bit,
                            probability_weather=probability_weather, accuweather=current_weather_accuweather, city=city)
@@ -78,6 +101,11 @@ def current_weather(city):
 
 @app.route('/weather', methods=['POST'])
 def weather():
+    """
+    This route decides what we want to look: current weather or weather forecast by form data
+
+    :return: Redirect to another route
+    """
     city = request.form['city']
 
     if request.form["action"] == 'current':
@@ -88,6 +116,11 @@ def weather():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """
+    Route for start page
+
+    :return: Template weather.html
+    """
     return render_template('weather.html')
 
 

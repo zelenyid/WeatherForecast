@@ -1,87 +1,95 @@
+<!-- Display current weather -->
 {% extends 'base.html' %}
 
 {% block content %}
-<div style="background-color: #f5f5f5; height: 100vh">
-    <div class="container h-100">
-        <div class="row justify-content-center">
-            <div class="col-md-12 col-sm-12 col-xs-12 pt-5">
-                <div class="card border-0 p-3 shadow-sm text-center">
-                    <a href="/"><button type="button" class="btn btn-primary m-2">Back</button></a>
-                    <h3 class="text-muted">Current Weather For {{ city }} (Probability)</h3>
+    <div style="background-color: #f5f5f5; height: 100vh">
+        <div class="container h-100">
+            <div class="row justify-content-center">
+                <div class="col-md-12 col-sm-12 col-xs-12 pt-5">
+                    <div class="card border-0 p-3 shadow-sm text-center">
+                        <a href="/">
+                            <button type="button" class="btn btn-primary m-2">Back</button>
+                        </a>
+                        <h3 class="text-muted">Current Weather For {{ city }} (Probability)</h3>
 
-                    <h5 class="lead text-muted">Weather: {% for weather in probability_weather['weather'] %}
-                        {{ weather[0] }} - probability: {{ weather[1] }}%,
-                    {% endfor %}</h5>
-                    <h5 class="lead text-muted">Temperature: {% for temp in probability_weather['temp'] %}
+                        <h5 class="lead text-muted">Weather: {% for weather in probability_weather['weather'] %}
+                            {{ weather[0] }} - probability: {{ weather[1] }}%,
+                        {% endfor %}</h5>
+                        <h5 class="lead text-muted">Temperature: {% for temp in probability_weather['temp'] %}
                             {{ temp[0] }}&#8451; - probability: {{ temp[1] }}%,
                         {% endfor %}</h5>
-                    <h5 class="lead text-muted">Humidity: {% for humidity in probability_weather['humidity'] %}
+                        <h5 class="lead text-muted">Humidity: {% for humidity in probability_weather['humidity'] %}
                             {{ humidity[0] }}% - probability: {{ humidity[1] }}%,
                         {% endfor %}</h5>
-                    <h5 class="lead text-muted">Wind Speed: {% for wind_speed in probability_weather['wind_speed'] %}
-                        {{ wind_speed[0] }} mph - probability: {{ wind_speed[1] }}%,
-                        {% endfor %}</h5>
-                    <h5 class="lead text-muted">Wind direction: {% for wind_degree in probability_weather['wind_degree'] %}
-                        <b><span style="transform: rotate({{ -wind_degree[0] }}deg);
-                            -ms-transform: rotate({{ -wind_degree[0] }}deg); /*  for IE  */
+                        <h5 class="lead text-muted">Wind Speed:
+                            {% for wind_speed in probability_weather['wind_speed'] %}
+                                {{ wind_speed[0] }} mph - probability: {{ wind_speed[1] }}%,
+                            {% endfor %}</h5>
+                        <h5 class="lead text-muted">Wind direction:
+                            {% for wind_degree in probability_weather['wind_degree'] %}
+                                <b><span style="transform: rotate({{ -wind_degree[0] }}deg);
+                                        -ms-transform: rotate({{ -wind_degree[0] }}deg); /*  for IE  */
 
-                            /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-                            -webkit-transform: rotate({{ -wind_degree[0] }}deg);
-                            display: inline-block;">&rarr;</span></b> - probability: {{ wind_degree[1] }}%,
-                    {% endfor %}
-                    </h5>
+                                        /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+                                        -webkit-transform: rotate({{ -wind_degree[0] }}deg);
+                                        display: inline-block;">&rarr;</span></b> - probability: {{ wind_degree[1] }}%,
+                            {% endfor %}
+                        </h5>
 
-                </div>
+                    </div>
 
-                <div class="card border-0 p-3 shadow-sm text-center">
-                    <h3 class="text-muted">Current Weather For {{ city }} (Open Weather Map)</h3>
+                    <div class="card border-0 p-3 shadow-sm text-center">
+                        <h3 class="text-muted">Current Weather For {{ city }} (Open Weather Map)</h3>
 
-                    <h5 class="lead text-muted">Weather: {{ open_weather_map['weather'] }}</h5>
-                    <h5 class="lead text-muted">Temperature: {{ open_weather_map['temp'] }}&#8451;</h5>
-                    <h5 class="lead text-muted">Humidity: {{ open_weather_map['humidity'] }}%</h5>
-                    <h5 class="lead text-muted">Wind Speed: {{ open_weather_map['wind_speed']}} mph</h5>
-                    <h5 class="lead text-muted">Wind direction: <b><span style="transform: rotate({{ -open_weather_map['wind_degree'] }}deg);
-                            -ms-transform: rotate({{ -open_weather_map['wind_degree'] }}deg); /*  for IE  */
+                        <h5 class="lead text-muted">Weather: {{ open_weather_map['weather'] }}</h5>
+                        <h5 class="lead text-muted">Temperature: {{ open_weather_map['temp'] }}&#8451;</h5>
+                        <h5 class="lead text-muted">Humidity: {{ open_weather_map['humidity'] }}%</h5>
+                        <h5 class="lead text-muted">Wind Speed: {{ open_weather_map['wind_speed'] }} mph</h5>
+                        <h5 class="lead text-muted">Wind direction: <b><span
+                                style="transform: rotate({{ -open_weather_map['wind_degree'] }}deg);
+                                        -ms-transform: rotate({{ -open_weather_map['wind_degree'] }}deg); /*  for IE  */
 
-                            /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-                            -webkit-transform: rotate({{ -open_weather_map['wind_degree'] }}deg);
-                            display: inline-block;">&rarr;</span></b></h5>
+                                        /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+                                        -webkit-transform: rotate({{ -open_weather_map['wind_degree'] }}deg);
+                                        display: inline-block;">&rarr;</span></b></h5>
 
-                </div>
+                    </div>
 
-                <div class="card border-0 p-3 shadow-sm text-center">
-                    <h3 class="text-muted">Current Weather For {{ city }} (WeatherBit)</h3>
+                    <div class="card border-0 p-3 shadow-sm text-center">
+                        <h3 class="text-muted">Current Weather For {{ city }} (WeatherBit)</h3>
 
-                    <h5 class="lead text-muted">Weather: {{ weather_bit['weather'] }}</h5>
-                    <h5 class="lead text-muted">Temperature: {{ weather_bit['temp'] }}&#8451;</h5>
-                    <h5 class="lead text-muted">Humidity: {{ weather_bit['humidity'] }}%</h5>
-                    <h5 class="lead text-muted">Wind Speed: {{ weather_bit['wind_speed']}} mph</h5>
-                    <h5 class="lead text-muted">Wind direction: <b><span style="transform: rotate({{ -weather_bit['wind_degree'] }}deg);
-                            -ms-transform: rotate({{ -weather_bit['wind_degree'] }}deg); /*  for IE  */
+                        <h5 class="lead text-muted">Weather: {{ weather_bit['weather'] }}</h5>
+                        <h5 class="lead text-muted">Temperature: {{ weather_bit['temp'] }}&#8451;</h5>
+                        <h5 class="lead text-muted">Humidity: {{ weather_bit['humidity'] }}%</h5>
+                        <h5 class="lead text-muted">Wind Speed: {{ weather_bit['wind_speed'] }} mph</h5>
+                        <h5 class="lead text-muted">Wind direction: <b><span
+                                style="transform: rotate({{ -weather_bit['wind_degree'] }}deg);
+                                        -ms-transform: rotate({{ -weather_bit['wind_degree'] }}deg); /*  for IE  */
 
-                            /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-                            -webkit-transform: rotate({{ -weather_bit['wind_degree'] }}deg);
-                            display: inline-block;">&rarr;</span></b></h5>
+                                        /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+                                        -webkit-transform: rotate({{ -weather_bit['wind_degree'] }}deg);
+                                        display: inline-block;">&rarr;</span></b></h5>
 
-                </div>
+                    </div>
 
-                <div class="card border-0 p-3 shadow-sm text-center">
-                    <h3 class="text-muted">Current Weather For {{ city }} (AccuWeather)</h3>
+                    <div class="card border-0 p-3 shadow-sm text-center">
+                        <h3 class="text-muted">Current Weather For {{ city }} (AccuWeather)</h3>
 
-                    <h5 class="lead text-muted">Weather: {{ accuweather['weather'] }}</h5>
-                    <h5 class="lead text-muted">Temperature: {{ accuweather['temp'] }}&#8451;</h5>
-                    <h5 class="lead text-muted">Humidity: {{ accuweather['humidity'] }}%</h5>
-                    <h5 class="lead text-muted">Wind Speed: {{ accuweather['wind_speed']}} mph</h5>
-                    <h5 class="lead text-muted">Wind direction: <b><span style="transform: rotate({{ -accuweather['wind_degree'] }}deg);
-                            -ms-transform: rotate({{ -accuweather['wind_degree'] }}deg); /*  for IE  */
+                        <h5 class="lead text-muted">Weather: {{ accuweather['weather'] }}</h5>
+                        <h5 class="lead text-muted">Temperature: {{ accuweather['temp'] }}&#8451;</h5>
+                        <h5 class="lead text-muted">Humidity: {{ accuweather['humidity'] }}%</h5>
+                        <h5 class="lead text-muted">Wind Speed: {{ accuweather['wind_speed'] }} mph</h5>
+                        <h5 class="lead text-muted">Wind direction: <b><span
+                                style="transform: rotate({{ -accuweather['wind_degree'] }}deg);
+                                        -ms-transform: rotate({{ -accuweather['wind_degree'] }}deg); /*  for IE  */
 
-                            /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
-                            -webkit-transform: rotate({{ -accuweather['wind_degree'] }}deg);
-                            display: inline-block;">&rarr;</span></b></h5>
+                                        /* 	for browsers supporting webkit (such as chrome, firefox, safari etc.). */
+                                        -webkit-transform: rotate({{ -accuweather['wind_degree'] }}deg);
+                                        display: inline-block;">&rarr;</span></b></h5>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock content %}

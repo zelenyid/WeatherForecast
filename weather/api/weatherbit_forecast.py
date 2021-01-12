@@ -4,8 +4,18 @@ from config import WEATHER_BIT_TOKEN
 
 
 class WeatherBitForecaster:
+    """
+    Class for working with WeatherBit API
+    """
+
     @staticmethod
     def current_weather(city):
+        """
+        Get current weather
+
+        :param city: str, name of city
+        :return: dict, with key (category) and value from result of API for displaying on the page
+        """
         weather_url = requests.get(
             'https://api.weatherbit.io/v2.0/current?city={}&key={}'.format(city, WEATHER_BIT_TOKEN))
         weather_data = weather_url.json()
@@ -22,6 +32,12 @@ class WeatherBitForecaster:
 
     @staticmethod
     def weather_forecast(city):
+        """
+        Get weather forecast
+
+        :param city: str, name of city
+        :return: dict, with key (category) and value from result of API for displaying on the page
+        """
         weather_url = requests.get(
             'https://api.weatherbit.io/v2.0/forecast/daily?city={}&key={}'.format(city, WEATHER_BIT_TOKEN))
 

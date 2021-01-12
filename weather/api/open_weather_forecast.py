@@ -6,12 +6,22 @@ from opencage.geocoder import OpenCageGeocode
 from config import OPEN_WEATHER_TOKEN
 from config import GEOCODE_TOKEN
 
-URL ='https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid={API_key}'
+URL = 'https://api.openweathermap.org/data/2.5/onecall?lat=33.441792&lon=-94.037689&exclude=hourly,daily&appid={API_key}'
 
 
 class OpenWeatherForecaster:
+    """
+    Class for working with OpenWeather API
+    """
+
     @staticmethod
     def current_weather(city):
+        """
+        Get current weather
+
+        :param city: str, name of city
+        :return: dict, with key (category) and value from result of API for displaying on the page
+        """
         weather_url = requests.get(
             'http://api.openweathermap.org/data/2.5/weather?q={}&appid={}&units=metric'.format(city,
                                                                                                OPEN_WEATHER_TOKEN))
@@ -29,6 +39,13 @@ class OpenWeatherForecaster:
 
     @staticmethod
     def weather_forecast(city):
+        """
+        Get weather forecast. Here used Open Cage Geocoder (link on README.md). It's for getting lat and lon of city
+        because free type of API OpenWeather cannot send you result on just city name.
+
+        :param city: str, name of city
+        :return: dict, with key (category) and value from result of API for displaying on the page
+        """
         geocoder = OpenCageGeocode(GEOCODE_TOKEN)
 
         results = geocoder.geocode(city)
