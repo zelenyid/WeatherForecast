@@ -1,6 +1,7 @@
 # WeatherForecast
 App for prediction weather with some probability using APIs. <br>
-Used technologies: Python (Flask), HTML, CSS, Bootstrap
+Used technologies: Python (Flask), HTML, CSS, Bootstrap <br>
+You can test this app deployed on heroku on the next link: https://probability-weather.herokuapp.com/
 
 # Install and run project
 
